@@ -545,7 +545,16 @@
     new_stacked_area_chart_action,
     new_donut_chart_action,
     new_singlegraph_action
-  ].map(function(action) { return action.set_class('new-item').set_category('new-item') })
+  ]
+
+  if(ds.actions.list('new-item').length > 0) {
+    all_new_item_actions.push(ds.action.divider)
+    all_new_item_actions = all_new_item_actions.concat(ds.actions.list('new-item'))
+  }
+
+  all_new_item_actions = all_new_item_actions.map(function(action) { 
+    return action.set_class('new-item').set_category('new-item') 
+  })
 
   ds.actions.register('new-item',
                       all_new_item_actions.filter(function(action) {
